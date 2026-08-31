@@ -1,10 +1,11 @@
 import React from 'react';
+import { Heart, Sparkles, Shield, Bot } from 'lucide-react';
 
 /**
- * AASRA Companion Component
- * A trauma-informed, hybrid abstract AI support companion.
- * Rendered as an elegant luminous orb with organic breathing motion,
- * concentric listening waves, gentle thinking light, and serene reassuring glow.
+ * AASRA Companion Component: Mitra
+ * A trauma-informed, compassionate AI support companion.
+ * Rendered as an empathetic, luminous companion badge with warm golden-teal breathing motion,
+ * concentric listening waves, and clear status indicators.
  * 
  * Props:
  * - state: 'idle' | 'listening' | 'thinking' | 'speaking' | 'safety_support' | 'reassuring' | 'calm'
@@ -14,144 +15,113 @@ import React from 'react';
  */
 export default function AasraCompanion({ state = 'idle', size = 'md', showText = false, subtext }) {
   const sizeMap = {
-    sm: { container: 'w-12 h-12', orb: 'w-10 h-10', text: 'text-xs' },
-    md: { container: 'w-24 h-24', orb: 'w-20 h-20', text: 'text-sm' },
-    lg: { container: 'w-36 h-36', orb: 'w-32 h-32', text: 'text-base' }
+    sm: { container: 'w-12 h-12', orb: 'w-10 h-10', icon: 'w-5 h-5', text: 'text-xs' },
+    md: { container: 'w-24 h-24', orb: 'w-20 h-20', icon: 'w-9 h-9', text: 'text-sm' },
+    lg: { container: 'w-36 h-36', orb: 'w-32 h-32', icon: 'w-14 h-14', text: 'text-base' }
   };
 
   const currentSize = sizeMap[size] || sizeMap.md;
-
   const isSafetySupport = state === 'safety_support' || state === 'reassuring' || state === 'calm';
 
   return (
     <div className="flex flex-col items-center justify-center space-y-3 select-none">
       <div className={`relative flex items-center justify-center ${currentSize.container}`}>
         
-        {/* Concentric Ambient Waves when Listening / Speaking / Thinking */}
+        {/* Concentric Ambient Waves when Active */}
         {(state === 'listening' || state === 'speaking' || state === 'thinking') && (
           <>
-            <div className="absolute inset-0 rounded-full bg-primary/15 animate-ping duration-1000 motion-reduce:animate-none"></div>
-            <div className="absolute -inset-2 rounded-full border border-primary/20 animate-pulse motion-reduce:animate-none"></div>
-            <div className="absolute -inset-4 rounded-full border border-secondary/10"></div>
+            <div className="absolute inset-0 rounded-full bg-primary/20 animate-ping duration-1000 motion-reduce:animate-none"></div>
+            <div className="absolute -inset-2 rounded-full border border-primary/30 animate-pulse motion-reduce:animate-none"></div>
+            <div className="absolute -inset-4 rounded-full border border-secondary/20"></div>
           </>
         )}
 
         {/* Calm Serene Waves during Safety Support */}
         {isSafetySupport && (
           <>
-            <div className="absolute -inset-2 rounded-full bg-primary/10 animate-pulse duration-1000 motion-reduce:animate-none"></div>
-            <div className="absolute -inset-4 rounded-full border border-risk-low/20"></div>
+            <div className="absolute -inset-2 rounded-full bg-risk-low/20 animate-pulse duration-1000 motion-reduce:animate-none"></div>
+            <div className="absolute -inset-4 rounded-full border border-risk-low/30"></div>
           </>
         )}
 
         {/* Outer Glow Halo */}
         <div className={`absolute inset-0 rounded-full blur-xl transition-all duration-700 ${
           state === 'speaking'
-            ? 'bg-primary/20 opacity-80'
+            ? 'bg-primary/30 opacity-90'
             : state === 'listening'
-            ? 'bg-gradient-to-r from-primary/35 to-secondary/35 opacity-80'
+            ? 'bg-gradient-to-r from-primary/40 to-secondary/40 opacity-90'
             : state === 'thinking'
-            ? 'bg-gradient-to-r from-secondary/35 via-primary/30 to-primary-dark/25 opacity-80'
+            ? 'bg-gradient-to-r from-secondary/40 via-primary/30 to-primary-dark/30 opacity-90'
             : isSafetySupport
-            ? 'bg-gradient-to-r from-primary/30 via-risk-low/25 to-secondary/20 opacity-85'
-            : 'bg-gradient-to-r from-primary/25 via-primary-dark/20 to-secondary/15 opacity-70'
+            ? 'bg-gradient-to-r from-primary/30 via-risk-low/30 to-secondary/20 opacity-90'
+            : 'bg-gradient-to-r from-primary/25 via-primary-dark/20 to-secondary/20 opacity-75'
         }`}></div>
 
-        {/* Main Luminous Orb Container */}
-        <div className={`relative ${currentSize.orb} rounded-full transition-all duration-700 flex items-center justify-center overflow-hidden shadow-2xl border ${
-          state === 'listening' ? 'scale-105 border-primary/60' :
+        {/* Main Luminous Companion Badge Container */}
+        <div className={`relative ${currentSize.orb} rounded-3xl transition-all duration-700 flex items-center justify-center overflow-hidden shadow-xl border ${
+          state === 'listening' ? 'scale-105 border-primary shadow-primary/20' :
           state === 'thinking' ? 'border-secondary/60 animate-pulse' :
-          isSafetySupport ? 'border-risk-low/50 bg-primary-dark/80' :
-          'border-primary/30 animate-breathing-orb motion-reduce:animate-none'
+          isSafetySupport ? 'border-risk-low/50 bg-gradient-to-br from-primary-dark to-risk-low' :
+          'border-primary/40 bg-gradient-to-br from-primary via-primary-dark to-slate-800 animate-breathing-orb motion-reduce:animate-none'
         }`}>
           
-          {/* Internal Gradient Surface */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-text via-primary-dark to-primary"></div>
-          <div className={`absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] ${
-            isSafetySupport 
-              ? 'from-primary/30 via-risk-low/20 to-transparent' 
-              : 'from-primary/20 via-secondary/15 to-transparent'
-          }`}></div>
-
-          {/* Abstract Facial Geometry (Subtle Presence) */}
-          <svg className="w-full h-full p-2.5 opacity-85" viewBox="0 0 100 100" fill="none">
-            <defs>
-              <linearGradient id="aasraGlow" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#527D7D" stopOpacity="0.9" />
-                <stop offset="50%" stopColor="#9183A0" stopOpacity="0.7" />
-                <stop offset="100%" stopColor="#FFFDFC" stopOpacity="0.35" />
-              </linearGradient>
-              <linearGradient id="aasraWarmGlow" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#527D7D" stopOpacity="0.9" />
-                <stop offset="50%" stopColor="#639922" stopOpacity="0.8" />
-                <stop offset="100%" stopColor="#9183A0" stopOpacity="0.5" />
-              </linearGradient>
-            </defs>
-
-            {/* Subtle Inner Rings */}
-            <circle cx="50" cy="50" r="38" stroke={isSafetySupport ? "url(#aasraWarmGlow)" : "url(#aasraGlow)"} strokeWidth="0.75" strokeDasharray="3 3" className="opacity-40" />
-            <circle cx="50" cy="50" r="28" stroke={isSafetySupport ? "url(#aasraWarmGlow)" : "url(#aasraGlow)"} strokeWidth="1" className="opacity-60" />
-
-            {/* Faint Abstract Eye Lines */}
-            <path d="M 34 44 C 38 41, 44 41, 48 44" stroke={isSafetySupport ? "url(#aasraWarmGlow)" : "url(#aasraGlow)"} strokeWidth="1.5" strokeLinecap="round" opacity="0.65" />
-            <path d="M 52 44 C 56 41, 62 41, 66 44" stroke={isSafetySupport ? "url(#aasraWarmGlow)" : "url(#aasraGlow)"} strokeWidth="1.5" strokeLinecap="round" opacity="0.65" />
-
-            {/* Dynamic Waveform Response / Presence Indicator */}
-            {state === 'speaking' ? (
-              <g className="animate-pulse motion-reduce:animate-none">
-                <path d="M 30 58 Q 40 50, 50 58 T 70 58" stroke="url(#aasraGlow)" strokeWidth="2" fill="none" strokeLinecap="round" />
-                <path d="M 36 64 Q 45 60, 50 64 T 64 64" stroke="url(#aasraGlow)" strokeWidth="1" fill="none" strokeLinecap="round" opacity="0.7" />
-              </g>
-            ) : state === 'listening' ? (
-              <g className="animate-pulse motion-reduce:animate-none">
-                <circle cx="50" cy="58" r="4" fill="url(#aasraGlow)" opacity="0.8" />
-                <circle cx="50" cy="58" r="9" stroke="url(#aasraGlow)" strokeWidth="1" fill="none" opacity="0.5" />
-              </g>
+          {/* Inner Glowing Pattern */}
+          <div className="absolute inset-0 bg-radial-gradient opacity-10"></div>
+          
+          {/* Empathetic Avatar Face / Emblem */}
+          <div className="relative z-10 flex flex-col items-center justify-center text-white">
+            {isSafetySupport ? (
+              <Shield className={`${currentSize.icon} text-emerald-300 animate-pulse`} />
+            ) : state === 'speaking' ? (
+              <Sparkles className={`${currentSize.icon} text-amber-200 animate-bounce`} />
             ) : state === 'thinking' ? (
-              <g className="animate-spin duration-3000 origin-center motion-reduce:animate-none">
-                <circle cx="50" cy="58" r="5" stroke="url(#aasraGlow)" strokeWidth="1.5" strokeDasharray="3 2" fill="none" opacity="0.8" />
-              </g>
-            ) : isSafetySupport ? (
-              /* Warm Reassuring Soft Arc */
-              <g>
-                <path d="M 36 58 Q 50 66, 64 58" stroke="url(#aasraWarmGlow)" strokeWidth="2" fill="none" strokeLinecap="round" opacity="0.9" />
-                <circle cx="50" cy="50" r="10" fill="url(#aasraWarmGlow)" className="blur-[2px] opacity-60" />
-              </g>
+              <Bot className={`${currentSize.icon} text-secondary-light animate-spin duration-3000`} />
             ) : (
-              /* Soft Serene Smile Curve */
-              <path d="M 38 58 Q 50 64, 62 58" stroke="url(#aasraGlow)" strokeWidth="1.5" fill="none" strokeLinecap="round" opacity="0.75" />
+              <div className="flex flex-col items-center">
+                {/* Empathetic Avatar Eyes & Smile */}
+                <svg className="w-10 h-10 p-1 text-white" viewBox="0 0 100 100" fill="none">
+                  {/* Gentle curved brow/eyes */}
+                  <circle cx="34" cy="42" r="5" fill="#FFFDFC" />
+                  <circle cx="66" cy="42" r="5" fill="#FFFDFC" />
+                  <circle cx="36" cy="40" r="2" fill="#527D7D" />
+                  <circle cx="68" cy="40" r="2" fill="#527D7D" />
+                  {/* Warm gentle smile curve */}
+                  <path d="M 36 60 Q 50 72, 64 60" stroke="#FFFDFC" strokeWidth="4" strokeLinecap="round" />
+                  {/* Soft cheek blushes */}
+                  <ellipse cx="26" cy="54" rx="5" ry="3" fill="#E8C1CA" opacity="0.6" />
+                  <ellipse cx="74" cy="54" rx="5" ry="3" fill="#E8C1CA" opacity="0.6" />
+                </svg>
+              </div>
             )}
-
-            {/* Core Presence Light */}
-            <circle cx="50" cy="50" r="8" fill={isSafetySupport ? "url(#aasraWarmGlow)" : "url(#aasraGlow)"} className="blur-[1px] opacity-70" />
-          </svg>
+          </div>
         </div>
 
         {/* State Badge Dot */}
-        <div className="absolute -bottom-1 right-1 flex items-center space-x-1 bg-surface border border-primary/30 px-2 py-0.5 rounded-full shadow-lg">
-          <span className={`w-1.5 h-1.5 rounded-full ${
+        <div className="absolute -bottom-1.5 -right-1 flex items-center space-x-1 bg-surface border border-primary/30 px-2 py-0.5 rounded-full shadow-lg z-20">
+          <span className={`w-2 h-2 rounded-full ${
             state === 'speaking' ? 'bg-primary animate-ping motion-reduce:animate-none' :
             state === 'listening' ? 'bg-primary animate-pulse motion-reduce:animate-none' :
             state === 'thinking' ? 'bg-secondary animate-pulse motion-reduce:animate-none' :
             isSafetySupport ? 'bg-risk-low animate-pulse motion-reduce:animate-none' :
-            'bg-primary'
+            'bg-emerald-500'
           }`}></span>
-          <span className="text-[9px] font-medium text-text-muted uppercase tracking-wider">
-            {state === 'speaking' ? 'AASRA Speaking' : 
-             state === 'listening' ? 'AASRA Listening' : 
-             state === 'thinking' ? 'AASRA Thinking' : 
-             isSafetySupport ? 'AASRA Safety Support' : 
-             'AASRA Active'}
+          <span className="text-[9px] font-extrabold text-primary-dark uppercase tracking-wider">
+            {state === 'speaking' ? 'Mitra Speaking' : 
+             state === 'listening' ? 'Mitra Listening' : 
+             state === 'thinking' ? 'Mitra Thinking' : 
+             isSafetySupport ? 'Mitra Active' : 
+             'Mitra Ready'}
           </span>
-
         </div>
 
       </div>
 
       {showText && (
         <div className="text-center space-y-1">
-          <h4 className="text-sm font-semibold text-text tracking-wide flex items-center justify-center space-x-1.5">
-            <span>AASRA Support Companion</span>
+          <h4 className="text-xs font-bold text-text tracking-wide flex items-center justify-center space-x-1.5">
+            <span className="bg-primary/10 text-primary-dark px-3 py-1 rounded-full border border-primary/30 shadow-sm font-semibold">
+              Mitra &middot; AASRA Support Companion
+            </span>
           </h4>
           {subtext && <p className={`text-text-muted max-w-sm ${currentSize.text}`}>{subtext}</p>}
         </div>

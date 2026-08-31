@@ -21,15 +21,33 @@ function buildContextTags(text) {
   return tags;
 }
 
-function AasraBubble({ children, variant }) {
+function AasraBubble({ children, variant = 'normal' }) {
   return (
     <div className="flex items-start space-x-3 animate-fade-in">
-      <div className="w-9 h-9 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary-dark text-xs font-bold shadow-md flex-shrink-0">
-        AA
+      <div className="w-9 h-9 rounded-2xl bg-gradient-to-tr from-primary to-primary-dark border border-primary/40 flex items-center justify-center text-white text-xs font-black shadow-md flex-shrink-0">
+        M
       </div>
-      <div className={'bg-background border p-4 rounded-2xl max-w-md text-xs text-text leading-relaxed space-y-1.5 shadow-sm ' + (variant === 'critical' ? 'border-risk-critical/50' : 'border-border')}>
-        <p className="font-semibold text-primary-dark">AASRA Companion:</p>
+      <div className={`p-4 rounded-2xl max-w-md text-xs leading-relaxed shadow-sm space-y-1 ${
+        variant === 'critical'
+          ? 'bg-risk-critical-bg border border-risk-critical/40 text-risk-critical'
+          : 'bg-surface border border-border text-text'
+      }`}>
+        <p className="font-semibold text-primary-dark">Mitra (AASRA Companion):</p>
         {children}
+      </div>
+    </div>
+  );
+}
+
+function ThinkingBubble() {
+  return (
+    <div className="flex items-start space-x-3 animate-fade-in">
+      <div className="w-9 h-9 rounded-2xl bg-gradient-to-tr from-primary to-primary-dark border border-primary/40 flex items-center justify-center text-white text-xs font-black shadow-md flex-shrink-0 animate-pulse">
+        M
+      </div>
+      <div className="bg-surface border border-border p-3.5 rounded-2xl text-xs text-text-muted flex items-center space-x-2 shadow-sm">
+        <span className="w-2 h-2 rounded-full bg-primary animate-ping" />
+        <span>Mitra is listening...</span>
       </div>
     </div>
   );
@@ -45,25 +63,6 @@ function UserBubble({ text, name }) {
           </p>
         )}
         {text}
-      </div>
-    </div>
-  );
-}
-
-function ThinkingBubble() {
-  return (
-    <div className="flex items-start space-x-3 animate-fade-in">
-      <div className="w-9 h-9 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary-dark text-xs font-bold shadow-md flex-shrink-0">
-        AA
-      </div>
-      <div className="bg-background border border-primary/40 p-4 rounded-2xl max-w-sm text-xs text-text leading-relaxed shadow-md animate-pulse">
-        <p className="font-semibold text-primary-dark flex items-center space-x-1.5">
-          <Sparkles className="w-4 h-4 text-primary animate-spin" />
-          <span>AASRA Companion:</span>
-        </p>
-        <p className="text-text-muted italic">
-          "Thank you for sharing that. Taking a moment to understand..."
-        </p>
       </div>
     </div>
   );
@@ -115,8 +114,8 @@ export default function TraumaChatbot({
   const [isRecording, setIsRecording]         = useState(false);
   const [recordingSeconds, setRecordingSeconds] = useState(0);
   const [activeProsody, setActiveProsody]     = useState(null);
-  const [victimName, setVictimName]           = useState('Sunita Devi (Anon.)');
-  const [victimLocation, setVictimLocation]   = useState('Hathras, UP');
+  const [victimName, setVictimName]           = useState('Protected Complainant (Anon.)');
+  const [victimLocation, setVictimLocation]   = useState('');
 
   // ── Conversation state
   const [phase, setPhase]                     = useState('idle'); // idle | conversing | assessing
@@ -126,11 +125,11 @@ export default function TraumaChatbot({
   const [contextTags, setContextTags]         = useState([]);
   const [isBotThinking, setIsBotThinking]     = useState(false);
 
-  const messagesEndRef = useRef(null);
+  const chatThreadRef = useRef(null);
 
   useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    if (chatThreadRef.current) {
+      chatThreadRef.current.scrollTop = chatThreadRef.current.scrollHeight;
     }
   }, [chatMessages, isBotThinking]);
 
@@ -268,10 +267,7 @@ export default function TraumaChatbot({
   const handleScenarioSelect = async (preset) => {
     setActiveProsody(preset.prosody);
     setVictimName(preset.name);
-    setVictimLocation(
-      preset.name.includes('Hathras') ? 'Hathras, UP' :
-      preset.name.includes('Gwalior') ? 'Gwalior, MP' : 'Jaipur, RJ'
-    );
+    setVictimLocation('');
     setContextTags(buildContextTags(preset.complaint_text));
     if (!isSilentMode) audioEngine.speakPrompt(preset.complaint_text, selectedLanguage, 0.95, 1.0);
     setChatMessages([]);
@@ -321,15 +317,17 @@ export default function TraumaChatbot({
         {/* Header */}
         <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-border">
           <div className="flex items-center space-x-3">
-            <div className="p-2 bg-slate-950 border border-teal-500/40 rounded-2xl">
+            <div className="p-1.5 bg-primary/10 border border-primary/30 rounded-2xl">
               <AasraCompanion state={companionState} size="sm" />
             </div>
             <div>
               <div className="flex items-center space-x-2">
                 <span className="text-xs font-semibold text-text">{victimName}</span>
-                <span className="text-[10px] text-primary-dark bg-primary/10 border-primary/30 px-2 py-0.5 rounded font-mono">
-                  <MapPin className="w-2.5 h-2.5 inline mr-1" />{victimLocation}
-                </span>
+                {victimLocation && (
+                  <span className="text-[10px] text-primary-dark bg-primary/10 border-primary/30 px-2 py-0.5 rounded font-mono">
+                    <MapPin className="w-2.5 h-2.5 inline mr-1" />{victimLocation}
+                  </span>
+                )}
               </div>
               <p className="text-xs text-text-muted">AASRA Support Session &middot; Confidential</p>
             </div>
@@ -348,10 +346,10 @@ export default function TraumaChatbot({
         </div>
 
         {/* Message Thread */}
-        <div className="flex-1 space-y-4 overflow-y-auto pr-2 scroll-smooth" style={{ maxHeight: '360px' }}>
+        <div ref={chatThreadRef} className="flex-1 space-y-4 overflow-y-auto pr-2 scroll-smooth" style={{ maxHeight: '360px' }}>
 
           <AasraBubble>
-            <p>Welcome. You are in a safe, confidential space. Take all the time you need. Share your experience below, or choose a scenario to begin.</p>
+            <p>Welcome. I am Mitra — your confidential AASRA support companion. You are in a safe, protected space. Take all the time you need. Share your experience below, or select a scenario to begin.</p>
           </AasraBubble>
 
           <ContextMemoryBanner tags={contextTags} />
@@ -433,8 +431,6 @@ export default function TraumaChatbot({
               <span className="text-xs font-mono font-bold text-primary-dark bg-primary/10 px-2.5 py-1 rounded-lg">{recordingSeconds}s</span>
             </div>
           )}
-
-          <div ref={messagesEndRef} />
         </div>
 
         {/* See Support Options Now */}

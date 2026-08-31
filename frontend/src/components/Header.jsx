@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldAlert, Activity, FileText, Lock, Globe, Scale, EyeOff } from 'lucide-react';
+import { ShieldCheck, Activity, FileText, Lock, Globe, Scale, EyeOff } from 'lucide-react';
 import { t } from '../utils/translations';
 
 export default function Header({ 
@@ -19,22 +19,22 @@ export default function Header({
           
           {/* Brand & Emblem Header */}
           <div className="flex items-center space-x-3.5">
-            <div className="w-10 h-10 rounded-xl bg-background border border-primary/40 p-0.5 shadow-md flex items-center justify-center flex-shrink-0">
-              <ShieldAlert className="w-5 h-5 text-primary" />
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-primary to-primary-dark border border-primary/40 shadow-md flex items-center justify-center flex-shrink-0 text-white">
+              <ShieldCheck className="w-6 h-6 text-white" />
             </div>
 
             <div className="flex flex-col justify-center">
               <div className="flex items-center space-x-2">
+                <span className="text-base sm:text-lg font-black tracking-tight text-primary-dark font-sans leading-none">
+                  AASRA
+                </span>
                 <span className="text-[10px] font-bold tracking-widest text-primary-dark bg-primary/10 border border-primary/30 px-2 py-0.5 rounded font-mono">
                   {t('helpline_tag', selectedLanguage)}
                 </span>
-                <span className="text-[11px] text-text-muted font-medium hidden md:inline">
-                  {t('helpline_subtitle', selectedLanguage)}
-                </span>
               </div>
-              <h1 className="text-sm sm:text-base font-semibold text-text tracking-tight font-sans leading-tight mt-0.5">
-                {t('app_title', selectedLanguage)}
-              </h1>
+              <p className="text-[11px] text-text-muted font-medium mt-0.5">
+                {t('helpline_subtitle', selectedLanguage)} &middot; {t('app_title', selectedLanguage)}
+              </p>
             </div>
           </div>
 

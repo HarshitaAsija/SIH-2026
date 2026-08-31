@@ -3,10 +3,10 @@ import { User, MapPin, Shield, CheckCircle, FileText, Heart, Lock, HelpCircle } 
 import { t } from '../utils/translations';
 
 export default function PersonalizedProfileCard({ assessmentResult, onProfileChange, selectedLanguage = 'en' }) {
-  const [name, setName] = useState('Sunita Devi (Anonymized)');
-  const [district, setDistrict] = useState('Hathras, Uttar Pradesh');
-  const [category, setCategory] = useState('SC Woman Victim');
-  const [policeStation, setPoliceStation] = useState('Hathras Sadar Police Station');
+  const [name, setName] = useState('Protected Citizen (Anonymized)');
+  const [district, setDistrict] = useState('Designated Redressal District');
+  const [category, setCategory] = useState('Atrocity Protection Beneficiary');
+  const [policeStation, setPoliceStation] = useState('Special Police Unit (PCR)');
   const [isPlanOpen, setIsPlanOpen] = useState(true);
 
   const handleUpdate = (newName, newDist, newCat, newPs) => {

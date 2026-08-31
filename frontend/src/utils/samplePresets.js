@@ -52,11 +52,11 @@ export const SAMPLE_PRESETS = [
   },
   {
     id: "preset-hathras",
-    name: "Sunita Devi (Hathras, UP)",
-    category: "Atrocity At-Risk",
+    name: "Scenario 4: Urgent Protection & Violence Threat",
+    category: "Critical Protection",
     is_critical_preset: true,
-    complaint_text: "Main Hathras se bol rahi hu. Gaon ke sarpanch aur unke gundon ne mere pati ko lathi se mara. Hamari zameen pe qabza kar liya aur keh rahe hain gaau chhod do varna jaan se maar denge. Police thane gayi toh daroga ne FIR likhne se manaa kar diya. Mujhe ab marne ka man kar raha hai, koi rasta nahi dikh raha.",
-    detected_indicators: ["Physical Violence", "Police Refusal", "Land Encroachment", "Suicidal Ideation Flag"],
+    complaint_text: "I am facing physical violence and illegal land encroachment in my village. We are being threatened with our lives if we do not leave immediately, and the local authorities refused to file an FIR. I feel helpless and need urgent protection.",
+    detected_indicators: ["Physical Violence", "Police Refusal to File FIR", "Land Encroachment", "Imminent Safety Threat"],
     prosody: {
       pitch_mean: 245.0,
       pitch_std: 48.2,
