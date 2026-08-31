@@ -15,8 +15,8 @@ export const translations = {
     // AASRA Core Experience
     aasra_hero_heading: "You don't have to go through this alone.",
     aasra_hero_subtext: "A confidential space to share what you're experiencing and understand what support may be available to you.",
-    aasra_greeting: "Hello, I am Mitra — your AASRA support companion. You don't have to go through this alone. Take all the time you need.",
-    btn_speak_aasra: "Speak with Mitra",
+    aasra_greeting: "Hello, I am Saathi — your AASRA support companion. You don't have to go through this alone. Take all the time you need.",
+    btn_speak_aasra: "Speak with Saathi",
     btn_type_privately: "Type privately",
     btn_silent_mode: "I can't speak right now",
     btn_emergency_support: "Emergency Support (112)",

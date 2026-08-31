@@ -2,7 +2,7 @@ import React from 'react';
 import { Heart, Sparkles, Shield, Bot } from 'lucide-react';
 
 /**
- * AASRA Companion Component: Mitra
+ * AASRA Companion Component: Saathi
  * A trauma-informed, compassionate AI support companion.
  * Rendered as an empathetic, luminous companion badge with warm golden-teal breathing motion,
  * concentric listening waves, and clear status indicators.
@@ -106,11 +106,11 @@ export default function AasraCompanion({ state = 'idle', size = 'md', showText =
             'bg-emerald-500'
           }`}></span>
           <span className="text-[9px] font-extrabold text-primary-dark uppercase tracking-wider">
-            {state === 'speaking' ? 'Mitra Speaking' : 
-             state === 'listening' ? 'Mitra Listening' : 
-             state === 'thinking' ? 'Mitra Thinking' : 
-             isSafetySupport ? 'Mitra Active' : 
-             'Mitra Ready'}
+            {state === 'speaking' ? 'Saathi Speaking' : 
+             state === 'listening' ? 'Saathi Listening' : 
+             state === 'thinking' ? 'Saathi Thinking' : 
+             isSafetySupport ? 'Saathi Active' : 
+             'Saathi Ready'}
           </span>
         </div>
 
@@ -120,7 +120,7 @@ export default function AasraCompanion({ state = 'idle', size = 'md', showText =
         <div className="text-center space-y-1">
           <h4 className="text-xs font-bold text-text tracking-wide flex items-center justify-center space-x-1.5">
             <span className="bg-primary/10 text-primary-dark px-3 py-1 rounded-full border border-primary/30 shadow-sm font-semibold">
-              Mitra &middot; AASRA Support Companion
+              Saathi &middot; AASRA Support Companion
             </span>
           </h4>
           {subtext && <p className={`text-text-muted max-w-sm ${currentSize.text}`}>{subtext}</p>}

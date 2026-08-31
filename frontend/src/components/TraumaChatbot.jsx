@@ -25,14 +25,14 @@ function AasraBubble({ children, variant = 'normal' }) {
   return (
     <div className="flex items-start space-x-3 animate-fade-in">
       <div className="w-9 h-9 rounded-2xl bg-gradient-to-tr from-primary to-primary-dark border border-primary/40 flex items-center justify-center text-white text-xs font-black shadow-md flex-shrink-0">
-        M
+        S
       </div>
       <div className={`p-4 rounded-2xl max-w-md text-xs leading-relaxed shadow-sm space-y-1 ${
         variant === 'critical'
           ? 'bg-risk-critical-bg border border-risk-critical/40 text-risk-critical'
           : 'bg-surface border border-border text-text'
       }`}>
-        <p className="font-semibold text-primary-dark">Mitra (AASRA Companion):</p>
+        <p className="font-semibold text-primary-dark">Saathi (AASRA Companion):</p>
         {children}
       </div>
     </div>
@@ -43,11 +43,11 @@ function ThinkingBubble() {
   return (
     <div className="flex items-start space-x-3 animate-fade-in">
       <div className="w-9 h-9 rounded-2xl bg-gradient-to-tr from-primary to-primary-dark border border-primary/40 flex items-center justify-center text-white text-xs font-black shadow-md flex-shrink-0 animate-pulse">
-        M
+        S
       </div>
       <div className="bg-surface border border-border p-3.5 rounded-2xl text-xs text-text-muted flex items-center space-x-2 shadow-sm">
         <span className="w-2 h-2 rounded-full bg-primary animate-ping" />
-        <span>Mitra is listening...</span>
+        <span>Saathi is listening...</span>
       </div>
     </div>
   );
@@ -349,7 +349,7 @@ export default function TraumaChatbot({
         <div ref={chatThreadRef} className="flex-1 space-y-4 overflow-y-auto pr-2 scroll-smooth" style={{ maxHeight: '360px' }}>
 
           <AasraBubble>
-            <p>Welcome. I am Mitra — your confidential AASRA support companion. You are in a safe, protected space. Take all the time you need. Share your experience below, or select a scenario to begin.</p>
+            <p>Welcome. I am Saathi — your confidential AASRA support companion. You are in a safe, protected space. Take all the time you need. Share your experience below, or select a scenario to begin.</p>
           </AasraBubble>
 
           <ContextMemoryBanner tags={contextTags} />
