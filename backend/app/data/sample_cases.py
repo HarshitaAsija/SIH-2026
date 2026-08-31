@@ -1,12 +1,12 @@
 SAMPLE_CASES = [
     {
         "case_id": "NHAA-2026-8942",
-        "victim_name": "Sunita Devi (Anonymized)",
+        "victim_name": "Protected Complainant (Anon.)",
         "channel": "Chatbot Intake",
-        "language": "Hindi (Code-Mixed)",
-        "district": "Hathras, Uttar Pradesh",
+        "language": "English",
+        "district": "Designated Grievance District",
         "timestamp": "2026-08-25T19:30:00Z",
-        "complaint_text": "Main Hathras se bol rahi hu. Gaon ke sarpanch aur unke gundon ne mere pati ko lathi se mara. Hamari zameen pe qabza kar liya aur keh rahe hain gaau chhod do varna jaan se maar denge. Police thane gayi toh daroga ne FIR likhne se manaa kar diya. Mujhe ab marne ka man kar raha hai, koi rasta nahi dikh raha.",
+        "complaint_text": "I am facing physical violence and illegal land encroachment in my village. We are being threatened with our lives if we do not leave immediately, and the local authorities refused to file an FIR. I feel helpless and need urgent protection.",
         "prosody": {
             "pitch_mean": 245.0,
             "pitch_std": 48.2,
