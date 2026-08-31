@@ -41,6 +41,14 @@ export default function App() {
     }
   };
 
+  // Force scroll to top on mount / refresh
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  }, []);
+
   // Load initial cases
   useEffect(() => {
     fetchCases();
@@ -63,9 +71,9 @@ export default function App() {
       
       const updatedCase = {
         case_id: data.case_id,
-        victim_name: intakePayload.complaint_text.includes('Hathras') ? "Sunita Devi (Anonymized)" : "Anonymous Complainant",
+        victim_name: "Protected Complainant (Anon.)",
         channel: intakePayload.channel,
-        district: intakePayload.complaint_text.includes('Hathras') ? "Hathras, UP" : "Intake Control Room",
+        district: "Intake Control Room",
         svi_score: data.svi_analysis.svi_score,
         risk_category: data.svi_analysis.risk_category,
         complaint_text: intakePayload.complaint_text,

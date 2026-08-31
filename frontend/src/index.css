@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body, #root {
+  background-color: #F7F4EE !important;
+  color: #34383C !important;
+  min-height: 100vh;
+}
+
 @layer utilities {
   .bg-radial-gradient {
     background: #F7F4EE;
